@@ -1,11 +1,14 @@
 import os
-from aiogram import Bot, Dispatcher, types, executor
+from aiogram import Bot, Dispatcher, types
+from aiogram.utils import executor
 
-API_TOKEN = os.getenv('API_TOKEN')
+API_TOKEN = os.getenv("BOT_TOKEN")
+
+if not API_TOKEN:
+    raise ValueError("BOT_TOKEN is not set!")
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
-
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
     await message.reply("Welcome! Send me your email to check for leaks.")
